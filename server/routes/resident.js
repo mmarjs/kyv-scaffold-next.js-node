@@ -21,4 +21,11 @@ router.post('/ward-resident', async (req, res, next) => {
   })
 })
 
+router.get('/ward-resident/:userId', async (req, res, next) => {
+  console.log(req.params)
+  let tempResident = await Resident.find({ _id: req.params.userId })
+  console.log(tempResident[0])
+  res.send(tempResident[0])
+})
+
 module.exports = router

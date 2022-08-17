@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const HeaderContainer = ({ children }) => {
-  return <Main>{children}</Main>;
-};
+  return <Main>{children}</Main>
+}
 
-export default HeaderContainer;
+export default HeaderContainer
 
 const Main = styled.div`
   display: inline-block;
@@ -25,5 +25,14 @@ const Main = styled.div`
     border-radius: 0px 10px 10px 10px;
     margin-top: 50px;
     box-shadow: 5px 5px #393535;
+    font-size: 40px;
   }
-`;
+
+  @media (max-width: 780px) {
+    padding: 30px 20px;
+    font-size: 40px;
+    font-weight: 800;
+    max-width: 90%;
+    font-size: 30px;
+  }
+`

@@ -28,7 +28,6 @@ const EventBlock = () => {
               .toString()
               .split(" ");
 
-            console.log("techDate", techDate);
             return (
               <Link key={index} href={"/events" + "?e=" + event["slug"]}>
                 <EventContainer>

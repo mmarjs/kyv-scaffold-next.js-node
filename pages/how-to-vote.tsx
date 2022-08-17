@@ -16,7 +16,7 @@ const HowToVotePage = () => {
     <Main>
       <Head>
         <title>
-          Know Your Vote 20222 - Toronto Election Education Platform by Toronto
+          Know Your Vote 2022 - Toronto Election Education Platform by Toronto
           Public Library
         </title>
       </Head>
@@ -25,14 +25,24 @@ const HowToVotePage = () => {
       <HeroImage />
 
       <MainContainer>
-        <HeaderContainer>How To Vote</HeaderContainer>
+        <HeaderContainer>About Voting</HeaderContainer>
 
-        <LeftHeaderContainer title="Got questions about voting in our next election?">
+        <LeftHeaderContainer title="Got questions about voting in the 2022 Toronto municipal election?">
           <Container>
-            You can view election results on the <a href="https://electionresults.toronto.ca/">City of Toronto's website.</a>
+            You can view election results on the{" "}
+            <a href="https://electionresults.toronto.ca/" target="_blank">
+              City of Toronto's website.
+            </a>
             <br />
             <br />
-            Visit <a href="https://www.toronto.ca/city-government/elections/">the City's Election Services website</a> for information about:
+            Visit{" "}
+            <a
+              href="https://www.toronto.ca/city-government/elections/"
+              target="_blank"
+            >
+              the City's Election Services website
+            </a>{" "}
+            for information about:
             <ul>
               <li>
                 Who can vote and what you need to bring to your voting place
@@ -45,7 +55,11 @@ const HowToVotePage = () => {
               <li>How to apply for one of the 15,000 election day jobs</li>
               <li>And lots of other information</li>
             </ul>
-            You can also use the City of Toronto's <a href="https://myvote.toronto.ca/home">MyVote website</a> to find out:
+            You can also use the City of Toronto's{" "}
+            <a href="https://myvote.toronto.ca/home" target="_blank">
+              MyVote website
+            </a>{" "}
+            to find out:
             <ul>
               <li>
                 Whether you're on the voter's list and how to add or update your
@@ -58,7 +72,14 @@ const HowToVotePage = () => {
               <li>A sample of your ballot (starting October 8)</li>
               <li>Candidates running in your ward</li>
             </ul>
-            Still got a question? <a href="https://www.toronto.ca/home/311-toronto-at-your-service/">Call 311</a>!
+            Still got a question?{" "}
+            <a
+              href="https://www.toronto.ca/home/311-toronto-at-your-service/"
+              target="_blank"
+            >
+              Call 311
+            </a>
+            !
             <br />
             <br />
             311 is a City of Toronto service available 24/7 to help you get

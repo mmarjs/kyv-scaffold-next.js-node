@@ -46,6 +46,11 @@ const Issue =styled.div`
   text-align: center;
   padding: 10px;
 
+  span {
+    width: 100%;
+    word-wrap: break-word;
+  }
+
   @media (max-width: 1040px) {
     font-size: 16px;
   }

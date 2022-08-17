@@ -1,22 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { WardMapContainer, WardSearchInputContainer, WardSearchContainer, SearchInput, ErrorMessage } from "./styles";
 import { useRouter } from "next/router";
 import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
-// interface WardMapProps {
-//   setError: (isError: boolean) => void;
-// }
 
 const WardMap: React.FC = () => {
     const router = useRouter();
-    const myContainer = useRef(null);
     const [isError, setIsError] = useState<boolean>(false);
     
     useEffect(() => {
-      if (myContainer.current) {
         createMap();
-      }
-    }, [myContainer]);
+    }, []);
 
     const createMap = () => {
       mapboxgl.accessToken = 'pk.eyJ1IjoieWFzaC1wcyIsImEiOiJjbDFkc3MzdnMwMDI1M2JtaWM3bjQ2cGgwIn0.GZ3p3cUa0oeQWoyStDS4pQ'
@@ -133,13 +127,10 @@ const WardMap: React.FC = () => {
           bbox: [-79.7, 43.5, -79.1, 43.9] // This is the bounds for the shapefile
         })
         
-        // document.getElementById('geocoder_input')?.appendChild(geocoder.onAdd(map))
-        if(myContainer.current){
-          myContainer.current.appendChild(geocoder.onAdd(map))
-          const geocoderInput = myContainer.current.querySelector('input')
-          geocoderInput.setAttribute('id', 'address')
-          geocoderInput.setAttribute('placeholder', 'Your address...')
-        }
+        document.getElementById('geocoder_input')?.appendChild(geocoder.onAdd(map))
+        const geocoderInput = document.getElementById('geocoder_input')?.querySelector('input')
+        geocoderInput.setAttribute('id', 'address')
+        geocoderInput.setAttribute('placeholder', 'Your address...')
 
         geocoder.on('result', (e) => {
           // Get location from geocoder and pass to above function
@@ -159,10 +150,10 @@ const WardMap: React.FC = () => {
         <WardMapContainer id="map" />
         <WardSearchContainer>
           <p>Not sure which Ward you're in? Enter your address or postal code to find your Ward:</p>
-          <div>
+          <WardSearchInputContainer>
             {isError && <ErrorMessage>Please enter a Toronto address to continue</ErrorMessage>}
-            <div id="geocoder_input" ref={myContainer} />
-          </div>
+            <SearchInput id="geocoder_input" />
+          </WardSearchInputContainer>
         </WardSearchContainer>
       </React.Fragment>
     );

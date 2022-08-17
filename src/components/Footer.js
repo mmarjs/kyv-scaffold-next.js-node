@@ -10,7 +10,7 @@ const Footer = () => {
         <L3>© Copyright 2022 Toronto Public Library</L3>
       </Left>
       <Right>
-        <L1>JOIN THE CONVERSATION</L1>
+        <L2>JOIN THE CONVERSATION</L2>
         <Links>
           <Link
             target="_blank"
@@ -60,7 +60,11 @@ const Left = styled.div`
 `
 
 const L1 = styled.p`
-  margin-left: ;
+  /* margin-bottom: 20px; */
+`
+
+const L2 = styled.p`
+  margin-bottom: 20px;
 `
 
 const L3 = styled.p`

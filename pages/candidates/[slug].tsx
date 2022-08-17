@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 import { client } from "../../api";
+import { UserContext } from "../../pages/_app";
 
-import { KYVBgDotsSVG } from "../../src/assets/kyv-bg-dots";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
+// import { KYVBgDotsSVG } from "../../src/assets/kyv-bg-dots";
 import { wards } from "../../mock-and-seed-data/wards";
 import Header from "../../src/components/Header";
 import Footer from "../../src/components/Footer";
@@ -15,8 +20,13 @@ import HeroImage from "../../src/components/HeroImage";
 import HeaderContainer from "../../src/components/HeaderContainer";
 import ThemeContainer from "../../src/components/ThemeContainer";
 import LeftHeaderContainer from "../../src/components/LeftHeaderContainer";
-import CandidateBlock from "../../src/components/CandidateBlock";
-import { url } from "inspector";
+import SaveWardOverlay from '../../src/components/SaveWardOverlay';
+// import CandidateBlock from "../../src/components/CandidateBlock";
+// import { url } from "inspector";
+
+type userObject = {
+  [key: string]: any;
+};
 
 const CandidatesPage = () => {
   const router = useRouter();
@@ -24,6 +34,9 @@ const CandidatesPage = () => {
   const [wardName, setWardName] = useState<string>("");
   const [selectedCandidate, setSelectedCandidate] = useState(0);
   const [candidates, setCandidates] = useState([]);
+  const [showMakeWardOverlay, setShowMakeWardOverlay] = useState(false)
+
+  const userContext: userObject = useContext(UserContext);
 
   const setSelectedCandidateHelper = (newSelectedCandidate) => {
     // TODO: get candidate responses for the new candidate
@@ -78,21 +91,40 @@ const CandidatesPage = () => {
     setCandidates(tempCandidates.data);
   };
 
+  const toggleSaveWardOverlay = () => {
+    if (showMakeWardOverlay) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    setShowMakeWardOverlay(!showMakeWardOverlay);
+  };
+
   useEffect(() => {
-    getCandidates(slug);
     const tempWard = wards.find((ward) => ward.slug == slug);
     setWardName(tempWard?.officialName);
-    // setWardNum(temp)
   }, [slug]);
+
+  useEffect(() => {
+    getCandidates(slug);
+  }, [])
 
   return (
     <Main>
       <Head>
         <title>
-          Know Your Vote 20222 - Toronto Election Education Platform by Toronto
+          Know Your Vote 2022 - Toronto Election Education Platform by Toronto
           Public Library
         </title>
       </Head>
+
+      {
+        showMakeWardOverlay ? 
+        <SaveWardOverlay ward={slug} closeModal={toggleSaveWardOverlay} />
+        : <></>
+      }
+
       <Header />
 
       <HeroImage />
@@ -114,7 +146,43 @@ const CandidatesPage = () => {
         <ThemeContainerTemp>
           <H2>{slug == "toronto-mayor" ? "Mayoral" : wardName} Candidates</H2>
 
-          {slug == "toronto-mayor" ? (
+          {
+            userContext.userWardSelected && slug !== "toronto-mayor" ? 
+              <Row>
+                {
+                  userContext.userWardSlug == slug ? 
+                  <MyWardBtn>
+                    <FontAwesomeIcon icon={faHome} />
+                    <p>My Ward</p>
+                  </MyWardBtn>
+                  :
+                  <Link href={"/candidates/" + userContext.userWardSlug}>
+                    <WardSelectBtn1>
+                    <FontAwesomeIcon icon={faHome} />
+                      <p>Go to my Ward ({userContext.userWardName})</p>
+                    </WardSelectBtn1>
+                  </Link>
+                }
+              </Row> 
+              : 
+              <Row>
+              <Link href="/">
+                <WardSelectBtn>
+                  <p>{slug == 'toronto-mayor' ? 'See Candidates by Ward' : 'Select a Different Ward'}</p>
+                </WardSelectBtn>
+              </Link>
+
+              {
+                slug !== 'toronto-mayor' &&
+                <WardSelectBtn1 onClick={toggleSaveWardOverlay}>
+                  <MyWardIcon src={'/images/home.png'} />
+                  <p>Make this my Ward</p>
+                </WardSelectBtn1>
+              }
+              </Row>
+          }
+
+          {/* {slug == "toronto-mayor" ? (
             <Link href="/">
               <WardSelectBtn>
                 <p>See Candidates by Ward</p>
@@ -126,7 +194,9 @@ const CandidatesPage = () => {
                 <p>Select a different Ward</p>
               </WardSelectBtn>
             </Link>
-          )}
+          )} */}
+
+
         </ThemeContainerTemp>
 
         <CandidatesComponentsContainer>
@@ -207,6 +277,7 @@ const CandidatesPage = () => {
                     candidates[selectedCandidate]?.websiteUrl.length > 0 ? (
                       <LinkItem
                         href={candidates[selectedCandidate]?.websiteUrl}
+                        target="_blank"
                       >
                         <LinkIcon src="/images/website.png" />
                         {/* <LinkName>{candidates[selectedCandidate]?.websiteUrl.split('https://')[1]}</LinkName> */}
@@ -218,6 +289,7 @@ const CandidatesPage = () => {
                     candidates[selectedCandidate]?.facebookUrl.length > 0 ? (
                       <LinkItem
                         href={candidates[selectedCandidate]?.facebookUrl}
+                        target="_blank"
                       >
                         <LinkIcon src="/images/facebook.png" />
                         {/* <LinkName>@{candidates[selectedCandidate]?.facebookUrl.split('https://www.facebook.com/')[1]}</LinkName> */}
@@ -229,6 +301,7 @@ const CandidatesPage = () => {
                     candidates[selectedCandidate]?.twitterUrl.length > 0 ? (
                       <LinkItem
                         href={candidates[selectedCandidate]?.twitterUrl}
+                        target="_blank"
                       >
                         <LinkIcon src="/images/twitter.png" />
                         {/* <LinkName>@{candidates[selectedCandidate]?.twitterUrl.split('https://twitter.com/')[1]}</LinkName> */}
@@ -240,6 +313,7 @@ const CandidatesPage = () => {
                     candidates[selectedCandidate]?.instagramUrl.length > 0 ? (
                       <LinkItem
                         href={candidates[selectedCandidate]?.instagramUrl}
+                        target="_blank"
                       >
                         <LinkIcon src="/images/instagram.png" />
                         {/* <LinkName>@{candidates[selectedCandidate]?.instagramUrl.split('https://www.instagram.com/')[1]}</LinkName> */}
@@ -405,6 +479,7 @@ const Candidate = styled.div`
   border-top-left-radius: 0;
   cursor: pointer;
   padding: 20px;
+  background-color: ${({selected}) => (selected ? '#EDA57180' : 'white')};
 `;
 
 const CImgHolder = styled.div`
@@ -494,6 +569,10 @@ const H2 = styled.h2`
   margin-left: 15px;
 `;
 
+const Row = styled.div`
+  display: flex;
+`
+
 const WardSelectBtn = styled.div`
   display: flex;
   align-items: center;
@@ -503,6 +582,14 @@ const WardSelectBtn = styled.div`
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin-left: 10px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    color: #fff;
+  }
 
   p {
     color: white;
@@ -510,10 +597,25 @@ const WardSelectBtn = styled.div`
   }
 `;
 
+
+const WardSelectBtn1 = styled(WardSelectBtn)`
+  background-color: #53A6D8;
+`
+
+const MyWardBtn = styled(WardSelectBtn)`
+  background-color: #36953F;
+`
+
+const MyWardIcon = styled.img`
+  width: 17px;
+  height: 15px;
+  margin-right: 8px;
+  margin-bottom: 2px;
+`
+
 const CandidateList = styled.div`
   background-color: white;
   padding: 10px 0;
-  // max-width: 350px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 
@@ -522,81 +624,8 @@ const CandidateList = styled.div`
   }
 `;
 
-// const Candidate = styled.div`
-//   border: 1px solid grey;
-//   margin: 15px;
-//   margin-bottom: 25px;
-//   padding: 10px;
-//   border-radius: 7px;
-//   border-top-left-radius: 0;
-//   display: flex;
-//   background-color: ${({ selected }) =>
-//     selected ? "rgba(237, 165, 113, 0.5)" : "white"};
-//   cursor: pointer;
-// `;
 
-const CLeft = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3px;
-  padding-top: 10px;
-  position: relative;
-
-  p {
-    margin: 0;
-  }
-`;
-
-const CImg = styled.img``;
-
-// const CImgHolder = styled.div`
-//   width: 70px;
-//   height: 93px;
-//   background-color: #0577c8;
-//   border: 1px solid #393535;
-//   border-radius: 7px;
-//   border-top-left-radius: 0;
-//   position: absolute;
-//   top: -25px;
-//   left: 5px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   .circle {
-//     width: 35px;
-//     height: 34px;
-//     background-color: white;
-//     border-radius: 40px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//   }
-
-//   p {
-//     font-weight: 600;
-//     text-align: center;
-//   }
-// `;
-
-const CRight = styled.div`
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding: 3px;
-  padding-bottom: 10px;
-`;
-
-const EName = styled.p`
-  font-weight: 600;
-  font-size: 18px;
-  margin: 0;
-`;
-
-const CTag = styled.p`
+const CTag = styled.div`
   margin: 0;
   margin-top: 5px;
   font-size: 12px;
@@ -612,7 +641,6 @@ const TC3Inner = styled.div`
 `;
 
 const TC3Left = styled.div`
-  /* flex: 2; */
   margin-right: 30px;
 `;
 
@@ -674,12 +702,6 @@ const LinkIcon = styled.img`
   height: 20px;
 `;
 
-const LinkName = styled.p`
-  margin: 0;
-  font-size: 14px;
-  margin-left: 10px;
-`;
-
 const CandidateQA = styled.div`
   display: flex;
   flex-direction: column;
@@ -693,6 +715,8 @@ const CandidateQA = styled.div`
 const SingleQA = styled.div`
   display: flex;
   padding: 10px;
+  margin-bottom: 24px;
+  line-height: 120%;
 `;
 
 const QALeft = styled.div`
@@ -702,6 +726,7 @@ const QALeft = styled.div`
   align-items: flex-end;
   padding-right: 20px;
   font-size: 18px;
+  width: 100%;
 
   p {
     text-align: right;

@@ -17,7 +17,7 @@ const IssuesPage = () => {
     <Main>
       <Head>
         <title>
-          Know Your Vote 20222 - Toronto Election Education Platform by Toronto
+          Know Your Vote 2022 - Toronto Election Education Platform by Toronto
           Public Library
         </title>
       </Head>

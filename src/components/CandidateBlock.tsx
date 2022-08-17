@@ -6,6 +6,7 @@ import { client } from "../../api";
 
 import ThemeContainer from "./ThemeContainer";
 import SeeMoreContainer from "./SeeMoreContainer";
+import CandidateImage from './CandidateImage';
 
 type Props = {
   ward?: string;
@@ -26,16 +27,6 @@ const CandidateBlock = ({ ward }: Props) => {
     }
 
     setCandidates(metaArray);
-  };
-
-  const getCandidateInitials = (fullname) => {
-    const nameArray = fullname?.split(" ") || [];
-    const initials = [];
-    for (var i = 0; i < nameArray.length; i++) {
-      initials.push(nameArray[i].charAt(0));
-    }
-
-    return initials;
   };
 
   useEffect(() => {
@@ -59,14 +50,7 @@ const CandidateBlock = ({ ward }: Props) => {
               <CandidateContainer>
                 <Candidate>
                   <ContainerLeft>
-                    <CImgHolder>
-                      <div
-                        style={{ width: "100%", paddingBottom: "125%" }}
-                      ></div>
-                      <div className="circle">
-                        <p>{getCandidateInitials(candidate?.fullname)}</p>
-                      </div>
-                    </CImgHolder>
+                    <CandidateImage name={candidate?.fullname} />
                   </ContainerLeft>
                   <ContainerRight>
                     <C1>{candidate?.fullname}</C1>
@@ -133,6 +117,7 @@ const ContainerLeft = styled.div`
   flex: 2;
   position: relative;
   height: auto;
+  margin-top: -35px;
 `;
 
 const ContainerRight = styled.div`

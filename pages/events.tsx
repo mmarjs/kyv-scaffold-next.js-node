@@ -37,7 +37,7 @@ const EventsPage = () => {
     <Main>
       <Head>
         <title>
-          Know Your Vote 20222 - Toronto Election Education Platform by Toronto
+          Know Your Vote 2022 - Toronto Election Education Platform by Toronto
           Public Library
         </title>
       </Head>
@@ -197,13 +197,14 @@ const Month = styled.p`
 `;
 
 const Date = styled.p`
-  font-size: 24px;
+  font-size: 26px;
   margin: 0 !important;
-  line-height: 26px;
+  line-height: 120%;
 `;
 
 const Year = styled.p`
   margin-top: 0 !important;
+  font-size: 12px;
 `;
 
 const ERight = styled.div`

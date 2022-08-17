@@ -8,3 +8,6 @@ Next.js application (backend server & resident/citizen front-end)
 
 - Testing change to env variables
 - Updating env var link to ec2 server
+- Testing Internet Explorer WardMap fix
+- Pushing the make-my-ward + translate fix to vercel
+- Fixed google translate file type issue

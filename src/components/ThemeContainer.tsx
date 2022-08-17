@@ -8,10 +8,10 @@ type Props = {
   width?: string;
   actionTitle?: string;
   actionLink?: string;
+  id?: string;
 };
 
 const componentWidth = (width) => {
-  console.log("width", width)
 
   if (width === "one") {
     return "33.3333%";
@@ -28,6 +28,7 @@ const ThemeContainer = ({
   width,
   actionTitle,
   actionLink,
+  id
 }: Props) => {
   const renderTitle = () => {
     if (title && !actionTitle) {
@@ -47,7 +48,7 @@ const ThemeContainer = ({
   };
 
   return (
-    <Main>
+    <Main id={id ? id : ''}>
       {renderTitle()}
       <article>{children}</article>
     </Main>
