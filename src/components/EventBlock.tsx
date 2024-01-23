@@ -130,8 +130,8 @@ const EventDescription = styled.div`
    -webkit-line-clamp: 3;
            line-clamp: 3; 
    -webkit-box-orient: vertical;
-   line-height: 120%;
    font-size: 14px;
+   line-height: 120%;
 `
 
 const Month = styled.p`

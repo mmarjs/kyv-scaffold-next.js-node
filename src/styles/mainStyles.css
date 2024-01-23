@@ -23,7 +23,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	/* font: inherit; */
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -31,9 +31,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
+/* body {
 	line-height: 1;
-}
+} */
 ol, ul {
 	list-style: none;
 }
@@ -48,6 +48,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+a {
+  color: #0007EB;
 }
 
 /* Main Styles */
@@ -68,6 +71,7 @@ body {
 
 body, p, h1, h2, h3, span, button {
   font-family: 'Poppins';
+  line-height: 120%;
 }
 
 .issue_description {
@@ -715,4 +719,180 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 
 .goog-te-banner-frame {
   display: none;
+}
+
+.link-popup-container .background {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.5);
+}
+
+@media (min-width: 800px) {
+  .link-popup-container .link-popup {
+    padding: 50px !important;
+  }
+}
+
+.link-popup-container .link-popup {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  width: calc(100% - 36px);
+  max-width: 898px;
+  padding: 20px;
+  background-color: #75bee9;
+  -webkit-box-shadow: 0 20px 20px rgb(0 0 0 / 15%);
+  box-shadow: 0 20px 20px rgb(0 0 0 / 15%);
+}
+
+.link-popup-container a.continue {
+  margin-right: 80px;
+}
+
+.link-popup-container a {
+  position: relative;
+  font: 500 20px/28px Poppins,sans-serif;
+  padding-left: 28px;
+}
+
+@media (min-width: 800px){
+  .link-popup-container a {
+    font: 500 22px Poppins,sans-serif;
+    padding-left: 42px;
+  }
+}
+
+.link-popup-container a:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 22px;
+  height: 22px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.link-popup-container a.continue:before {
+  background-image: url(/images/icon-arrow-right-white.svg);
+}
+
+.link-popup-container a.back:before {
+  background-image: url(/images/icon-plus-white.svg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.link-popup-container .logo {
+  margin-bottom: 35px;
+}
+
+@media (min-width: 1100px){
+  .logo {
+    height: 137px;
+    -webkit-transition: height .2s linear,-webkit-transform .2s linear;
+    transition: height .2s linear,-webkit-transform .2s linear;
+    transition: height .2s linear,transform .2s linear;
+    transition: height .2s linear,transform .2s linear,-webkit-transform .2s linear;
+  }
+}
+
+@media (min-width: 1100px){
+  svg#logo_small {
+    display: none;
+  }
+}
+
+svg#logo_small {
+  width: 150px;
+}
+
+@media (min-width: 1100px){
+  .logo-large {
+    display: block !important;
+  }
+}
+
+.logo-large {
+  display: none;
+  position: absolute;
+  height: 137px;
+}
+
+.logo-large svg#logo_top {
+  height: 58px !important;
+  width: 484px !important;
+}
+
+.logo-large #logo_container_x, .logo-large #logo_container_y, .logo-large svg#logo_top {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  height: 58px;
+}
+
+.logo-large svg {
+  -webkit-transition: -webkit-transform .2s linear;
+  transition: -webkit-transform .2s linear;
+  transition: transform .2s linear;
+  transition: transform .2s linear,-webkit-transform .2s linear;
+}
+
+.logo-large #logo_container_x {
+  pointer-events: none;
+  -webkit-transition: -webkit-transform .2s linear .15s;
+  transition: -webkit-transform .2s linear .15s;
+  transition: transform .2s linear .15s;
+  transition: transform .2s linear .15s,-webkit-transform .2s linear .15s;
+}
+
+.logo-large #logo_container_x, .logo-large #logo_container_y {
+  bottom: 0;
+  width: 348px;
+}
+
+#logo_top .cls-1 {
+  fill: #fff;
+}
+
+#logo_top .cls-2 {
+  fill: #6a4a9e;
+}
+
+#logo_top .cls-3 {
+  fill: #75e994;
+}
+
+
+
+#logo_bottom .cls-1 {
+  fill: #fff;
+}
+
+#logo_bottom .cls-2 {
+  fill: #eda571;
+}
+
+#logo_bottom .cls-3 {
+  fill: #f7ef6f;
+}
+
+#logo_small .cls-1 {
+  fill: #fff;
+}
+
+#logo_small .cls-2 {
+  fill: #6a4a9e;
+}
+
+#logo_small .cls-3 {
+  fill: #75e994;
 }

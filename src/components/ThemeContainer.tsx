@@ -78,7 +78,7 @@ const Main = styled.div`
   }
 
   .title-container {
-    background: #85cdf8;
+    background: #00B5E2;
     color: #393535;
     padding: 0 50px;
     display: flex;
@@ -86,6 +86,7 @@ const Main = styled.div`
     align-items: center;
     flex-wrap: wrap;
     height: 85px;
+    border-bottom: 2px solid #393535;
 
     @media (max-width: 1040px) {
       padding: 10px 18px;
@@ -107,12 +108,13 @@ const Main = styled.div`
   .title-container > a {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     color: #fff;
     font-size: 16px;
     text-decoration: none;
-    background: #b456d6;
+    background: #a849ca;
     border-radius: 10px;
+    border: 2px solid #393535;
 
     @media (max-width: 1040px) {
       padding: 10px;

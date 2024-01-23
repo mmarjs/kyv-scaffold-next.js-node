@@ -11,9 +11,10 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
   position: relative;
   padding: 0 80px;
+  max-width: 1344px;
+  margin: 80px auto;
 
   @media (max-width: 1040px) {
     padding: 0 20px;

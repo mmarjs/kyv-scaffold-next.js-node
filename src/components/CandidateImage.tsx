@@ -52,6 +52,7 @@ const CImgHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-size: cover;
 
   .circle {
     width: 45px;

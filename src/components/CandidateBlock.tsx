@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 import { client } from "../../api";
+import { wards } from "../../mock-and-seed-data/wards";
 
 import ThemeContainer from "./ThemeContainer";
 import SeeMoreContainer from "./SeeMoreContainer";
@@ -18,22 +19,26 @@ const CandidateBlock = ({ ward }: Props) => {
 
   const getCandidates = async () => {
     const tempCandidates = await client.get(ward === "mayoral" ? `/candidates/mayoral` : `/candidates/by-ward/${ward}`);
-    
 
-    const candidates = tempCandidates.data.length < 6 ? tempCandidates.data.length : 6;
     const metaArray = [];
-    for (let i = 0; i < candidates; i++) {
+    for (let i = 0; i < tempCandidates.data.length; i++) {
       metaArray.push(tempCandidates.data[i]);
     }
 
     setCandidates(metaArray);
   };
 
+  const getTagOfficialName = (slug) => {
+    const tempWard = wards.find((ward) => ward.slug == slug);
+    return tempWard?.officialName;
+  };
+
   useEffect(() => {
     getCandidates();
-    // const tempWard = wards.find(ward => ward.slug == slug)
-    // setWardName(tempWard?.officialName)
-    // setWardNum(tempWard?.number)
+  }, [])
+
+  useEffect(() => {
+    getCandidates();
   }, []);
 
   return (
@@ -44,17 +49,17 @@ const CandidateBlock = ({ ward }: Props) => {
             <Link
               key={index}
               href={
-                "/candidates/" + candidate?.ward + "?c=" + candidate?.slug
+                "/candidates/" + candidate?.ward + "?c=" + candidate?.slug + "&active=active"
               }
             >
               <CandidateContainer>
                 <Candidate>
                   <ContainerLeft>
-                    <CandidateImage name={candidate?.fullname} />
+                    <CandidateImage name={candidate?.fullname} imageURL={candidate?.profilePhotoUrl}/>
                   </ContainerLeft>
                   <ContainerRight>
                     <C1>{candidate?.fullname}</C1>
-                    <CLabel>Mayoral Candidate</CLabel>
+                    <CLabel>{getTagOfficialName(candidate.ward)}</CLabel>
                   </ContainerRight>
                 </Candidate>
               </CandidateContainer>
@@ -62,7 +67,7 @@ const CandidateBlock = ({ ward }: Props) => {
           );
         })}
       </Container>
-      <SeeMoreContainer to={`/candidates/${ward}`} />
+      {/* <SeeMoreContainer to={`/candidates/${ward}`} /> */}
     </div>
   );
 };

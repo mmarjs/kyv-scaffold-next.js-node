@@ -131,6 +131,7 @@ const WardMap: React.FC = () => {
         const geocoderInput = document.getElementById('geocoder_input')?.querySelector('input')
         geocoderInput.setAttribute('id', 'address')
         geocoderInput.setAttribute('placeholder', 'Your address...')
+        geocoderInput.setAttribute('name', 'address')
 
         geocoder.on('result', (e) => {
           // Get location from geocoder and pass to above function
@@ -149,7 +150,7 @@ const WardMap: React.FC = () => {
       <React.Fragment>
         <WardMapContainer id="map" />
         <WardSearchContainer>
-          <p>Not sure which Ward you're in? Enter your address or postal code to find your Ward:</p>
+          <p id="addressSpan">Not sure which Ward you're in? Enter your address or postal code to find your Ward:</p>
           <WardSearchInputContainer>
             {isError && <ErrorMessage>Please enter a Toronto address to continue</ErrorMessage>}
             <SearchInput id="geocoder_input" />

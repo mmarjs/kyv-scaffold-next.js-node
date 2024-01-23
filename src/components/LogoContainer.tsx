@@ -16,7 +16,7 @@ const LogoContainer = () => {
       </StackedLogo>
       <TPLLogo className="tpl-project">
             <span>A project by</span>
-            <Image src="/images/tpl-logo.png" width="130" height="45"></Image>
+            <Image src="/images/tpl-logo-2.png" width="130" height="45" alt="Toronto Public Library"/>
           </TPLLogo>
     </Container>
   );

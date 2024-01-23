@@ -14,15 +14,33 @@ declare global {
 
 const GoogleTranslation: React.FC<LayoutProps> = () => {
     useEffect(() => {
+        if(getCookie('googtrans')){
+            deleteCookie('googtrans', '/', '');
+        }
         var addScript = document.createElement('script');
         addScript.setAttribute('src', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit');
         document.body.appendChild(addScript);
         window.googleTranslateElementInit = GoogleTranslateElementInit;
     }, [])
 
+    const getCookie = (name) => {
+        return document.cookie.split(';').some(c => {
+            return c.trim().startsWith(name + '=');
+        });
+    }
+
+    const deleteCookie = (name, path, domain) => {
+        if (getCookie(name)) {
+            document.cookie = name + "=" +
+            ((path) ? ";path=" + path : "") +
+            ((domain) ? ";domain=" + domain : "") +
+            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+        }
+    }
+
     const GoogleTranslateElementInit = () => {
         new window.google.translate.TranslateElement({
-            pageLanguage: 'en',
+            // pageLanguage: 'en',
             // includedLanguages: "en,ms,ta,zh-CN", // include this for selected languages
             layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         },

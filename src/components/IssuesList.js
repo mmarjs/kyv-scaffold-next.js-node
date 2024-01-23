@@ -4,31 +4,32 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 import { Issues } from '../../mock-and-seed-data/issues'
-import ThemeContainer from './ThemeContainer';
+import ThemeContainer from './ThemeContainer'
 
 const IssuesList = () => {
   return (
-      <ThemeContainer title="Big Issues" width="full">
-        <IssuesContainer>
-          {
-            Issues.map((issue, index) => {
-              return (
-                <Link href={"/issue/" + issue.slug} key={index}>
-                  <Issue>
-                    <IssueImg src={issue.img} />
-                    <span>{issue.name}</span>
-                  </Issue>
-                </Link>
-              )
-            })
-          }
-        </IssuesContainer>
-      </ThemeContainer>
+    <ThemeContainer title="Learn About 5 Big Issues in the City" width="full">
+      <IssuesContainer>
+        {Issues.map((issue, index) => {
+          if (issue.featured)
+            return (
+              <Link href={'/issue/' + issue.slug} key={index}>
+                <Issue>
+                  <IssueImg
+                    style={{ backgroundImage: `url(${issue.img})` }}
+                    alt={`${issue.name} Image`}
+                  />
+                  <span>{issue.name}</span>
+                </Issue>
+              </Link>
+            )
+        })}
+      </IssuesContainer>
+    </ThemeContainer>
   )
 }
 
 export default IssuesList
-
 
 const IssuesContainer = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const IssuesContainer = styled.div`
   flex-wrap: wrap;
 `
 
-const Issue =styled.div`
+const Issue = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -56,11 +57,12 @@ const Issue =styled.div`
   }
 `
 
-const IssueImg = styled.img`
+const IssueImg = styled.div`
   width: 140px;
   height: 140px;
   border-radius: 100px;
   margin-bottom: 20px;
+  background-size: cover;
 
   @media (max-width: 1040px) {
     width: 120px;

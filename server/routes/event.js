@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const { Event } = require('../entities/event')
 
-// const tokenauth = require('../../middleware/tokenauth')
+const tokenauth = require('../../middleware/tokenauth')
 
 const express = require('express')
 const router = express.Router()
 
 // Create a new event
-router.post('/', async (req, res, next) => {
+router.post('/', tokenauth, async (req, res, next) => {
   console.log(req.body)
   let tempEventBody = req.body
   tempEventBody.slug = req.body.name

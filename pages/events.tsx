@@ -37,7 +37,7 @@ const EventsPage = () => {
     <Main>
       <Head>
         <title>
-          Know Your Vote 2022 - Toronto Election Education Platform by Toronto
+          Know Your Vote T.O. 2022 - Toronto Election Education Platform by the Toronto
           Public Library
         </title>
       </Head>
@@ -46,14 +46,17 @@ const EventsPage = () => {
       <HeroImage />
 
       <MainContainer>
-        <HeaderContainer>Events</HeaderContainer>
+        <HeaderContainer>
+          <>Events</>
+        </HeaderContainer>
 
         <LeftHeaderContainer title="About Events">
           <p>
             At these events, participants worked together to generate questions
             they thought Torontonians should be asking their Councillor
             candidates. You can see their questions on the Library's blog.
-            <br /><br />
+            <br />
+            <br />
             Please note: These events provided Torontonians with the opportunity
             to learn and discuss issues facing their city. Campaigning for or
             against any particular candidate was not allowed and the
@@ -199,7 +202,6 @@ const Month = styled.p`
 const Date = styled.p`
   font-size: 26px;
   margin: 0 !important;
-  line-height: 120%;
 `;
 
 const Year = styled.p`
@@ -276,7 +278,7 @@ const TC3Inner = styled.div`
 
 const ThemeContainer4 = styled(ThemeContainer)`
   /* flex: 2; */
-  background-color: #85cdf8;
+  background-color: #00B5E2;
   margin-left: 15px;
   width: calc(100% - 15px) !important;
 `;
@@ -323,7 +325,7 @@ const CEBtn2 = styled.button`
   min-width: 160px;
   border: none;
   border-radius: 8px;
-  background-color: #b456d6;
+  background-color: #a849ca;
   color: white;
   cursor: pointer;
 `;

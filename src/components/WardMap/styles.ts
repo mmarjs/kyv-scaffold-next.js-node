@@ -9,7 +9,7 @@ export const WardSearchContainer = styled.div`
   padding: 10px 20px;
   align-items: center;
   font-size: 16px;
-  background: #85cdf8;
+  background: #00B5E2;
   // color: #fff;
 
   @media (max-width: 600px) {

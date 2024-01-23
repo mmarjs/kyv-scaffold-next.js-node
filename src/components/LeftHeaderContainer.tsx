@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
 type Props = {
-  title?: string;
-  children?: JSX.Element;
+  children: JSX.Element,
+  title?: string
 };
 
 const LeftHeaderContainer = ({ children, title }: Props) => {
   const renderTitle = () => {
     if (title) {
       return (
-        <div className="left-header">
-          <h2>{title}</h2>
+        <div className="left-header" style={title.length > 50 ? {fontSize: "30px"} : {fontSize: "36px"}}>
+          <h2 dangerouslySetInnerHTML={{__html: title}} />
         </div>
       )
+    } else {
+      return null;
     }
   }
 
@@ -53,7 +55,6 @@ const Main = styled.div`
     font-weight: 800;
     font-size: 36px;
     margin-right: 40px;
-    line-height: 120%;
 
     @media (max-width: 1040px) {
       font-size: 28px;
@@ -68,10 +69,19 @@ const Main = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    line-height: 120%;
     font-weight: 300;
     font-size: 20px;
     flex: 3;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+
+      @media (max-width: 1040px) {
+        font-size: 20px;
+      }
+    }
 
     @media (max-width: 1040px) {
       font-size: 18px;

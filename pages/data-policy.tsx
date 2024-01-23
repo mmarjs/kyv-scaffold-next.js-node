@@ -14,7 +14,7 @@ const DataPolicyPage = () => {
     <Main>
       <Head>
         <title>
-          Know Your Vote 20222 - Toronto Election Education Platform by Toronto
+          Know Your Vote T.O. 2022 - Toronto Election Education Platform by the Toronto
           Public Library
         </title>
       </Head>
@@ -23,7 +23,9 @@ const DataPolicyPage = () => {
       <HeroImage />
 
       <MainContainer>
-        <HeaderContainer>How we use your information</HeaderContainer>
+        <HeaderContainer>
+          <>How we use your information</>
+        </HeaderContainer>
 
         <ThemeContainer>
           <Container>
@@ -54,7 +56,7 @@ const DataPolicyPage = () => {
                 , which then sends the correct ward associated with that address
                 back to knowyourvote.to so you can see the candidates who are
                 running in your ward. You can also click on your ward if you
-                don't want to type in your address. This helps users of the
+                don't want to type in your address. This helps users of 
                 knowyourvote.to quickly find which ward they live and vote in.{" "}
                 <a
                   href="https://www.mapbox.com/legal/privacy#:~:text=For%20purposes%20of%20the%20CCPA,are%20not%20our%20service%20providers."
@@ -101,7 +103,7 @@ const DataPolicyPage = () => {
                 into the email sign-up box, it is routed to MongoDB as our main
                 datastore and sent to SendinBlue.com, our emailing tool. Using
                 databases in this way is typical of almost every website you
-                visit.
+                visit.{" "}
                 <a
                   href="https://www.mongodb.com/legal/privacy-policy#:~:text=We%20collect%20Personal%20Data%20and,other%20events%20hosted%20by%20us."
                   target="_blank"
@@ -119,7 +121,11 @@ const DataPolicyPage = () => {
               created ways for you to use the website without providing your
               email address or your physical address.{" "}
             </p>
-            <p>Have questions? Please email or call us.</p>
+            <p>
+              Have questions? Email us at{" "}
+              <a href="mailto:info@knowyourvote.to">info@knowyourvote.to</a> or
+              call us at 1-833-319-2022.{" "}
+            </p>
             <p>
               To review the long-form data protection and privacy policy for
               knowyourvote.to please{" "}
@@ -145,7 +151,6 @@ const Main = styled.div``;
 
 const Container = styled.div`
   padding: 40px;
-  line-height: 120%;
 
   ul,
   ol {
